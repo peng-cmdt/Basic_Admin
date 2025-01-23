@@ -79,8 +79,7 @@ const columns = [
 const formRef = ref();
 
 const handleInitialFormParams = () => ({
-  name: "",
-  account: "",
+  assetId: "",
   status: null
 });
 const formItems = [
@@ -127,8 +126,7 @@ const formItems = [
   }
 ];
 const formData = reactive<{
-  name: string;
-  account: string;
+  assetId: string;
   status: number | null;
 }>(handleInitialFormParams());
 

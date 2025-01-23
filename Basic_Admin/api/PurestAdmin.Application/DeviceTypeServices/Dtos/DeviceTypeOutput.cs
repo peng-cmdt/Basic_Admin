@@ -13,7 +13,7 @@ public class DeviceTypeOutput
 	/// <summary>
 	/// 
 	/// </summary>
-	public string Remark { get; set; }
+	public string Remarks { get; set; }
 	/// <summary>
 	/// 设备类型（字典中的）
 	/// </summary>
@@ -21,5 +21,5 @@ public class DeviceTypeOutput
 	/// <summary>
 	/// 设备类型Id的int形式
 	/// </summary>
-	public string DeviceTypeIdInt { get; set; }
+	public long? DeviceTypeIdInt { get; set; }
 }

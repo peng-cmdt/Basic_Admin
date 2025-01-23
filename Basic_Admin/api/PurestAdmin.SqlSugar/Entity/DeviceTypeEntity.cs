@@ -25,5 +25,10 @@ public partial class DeviceTypeEntity
 	/// 设备类型Id的int形式
 	/// </summary>
 	[SugarColumn(ColumnName = "DEVICE_TYPE_ID_INT")]
-	public string DeviceTypeIdInt { get; set; }
+	public long DeviceTypeIdInt { get; set; }
+    /// <summary>
+    /// 备注
+    /// </summary>
+    [SugarColumn(ColumnName = "REMARKS")]
+    public string Remarks { get; set; }
 }

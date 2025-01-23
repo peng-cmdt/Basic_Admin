@@ -10,35 +10,34 @@ const columns = [
   { type: "checkbox", title: "", width: 60, align: "center" },
   {
     title: "设备类型ID",
-    field: "DeviceTypeId",
+    field: "deviceTypeId",
     minWidth: 160
   },
   {
     title: "设备名称",
-    field: "Name",
+    field: "name",
     minWidth: 150
   },
   {
     title: "备注",
-    field: "Remark",
+    field: "remarks",
     minWidth: 80
   },
   {
     title: "设备类型",
-    field: "Class",
+    field: "class",
     minWidth: 80
   }
 ];
 const formRef = ref();
 
 const handleInitialFormParams = () => ({
-  name: "",
-  account: "",
-  status: null
+  deviceTypeId: "",
+  class: null
 });
 const formItems = [
   {
-    field: "DeviceTypeId",
+    field: "deviceTypeId",
     title: "设备类型ID",
     span: 6,
     itemRender: { name: "$input", props: { placeholder: "设备类型ID" } }
@@ -52,7 +51,7 @@ const formItems = [
         return h(ReDictionary, {
           code: "dict_sensor_type",
           modelValue: data.class,
-          placeholder: "请选择类型",
+          placeholder: "请选择设备类型",
           onChange({ value }) {
             data.class = value;
           }
@@ -79,34 +78,9 @@ const formItems = [
   }
 ];
 const formData = reactive<{
-  name: string;
-  account: string;
-  status: number | null;
+  deviceTypeId: string;
+  class: number | null;
 }>(handleInitialFormParams());
-
-// 定义一个方法来根据状态生成标签
-const getStatusTag = (status: number) => {
-  const statusMap = {
-    2: { label: "使用中", tagStatus: "success" },
-    0: { label: "报废", tagStatus: "error" },
-    1: { label: "闲置", tagStatus: "info" },
-    3: { label: "出售", tagStatus: "primary" }
-  };
-
-  const { label, tagStatus } = statusMap[status] || {
-    label: "未知",
-    tagStatus: "default"
-  };
-
-  return h(
-    VxeTag,
-    {
-      status: tagStatus,
-      size: "mini"
-    },
-    { default: () => h("span", label) }
-  );
-};
 
 const handleSearch = () => {
   reVxeGridRef.value.loadData();

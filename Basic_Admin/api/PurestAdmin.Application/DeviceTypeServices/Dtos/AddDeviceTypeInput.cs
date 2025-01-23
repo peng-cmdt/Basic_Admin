@@ -15,8 +15,8 @@ public class AddDeviceTypeInput
 	/// <summary>
 	/// 
 	/// </summary>
-	[Required(ErrorMessage = "不能为空"), MaxLength(1000, ErrorMessage = "最大长度为：1000")]
-	public string Remark { get; set; }
+	[MaxLength(1000, ErrorMessage = "最大长度为：1000")]
+	public string Remarks { get; set; }
 	/// <summary>
 	/// 设备类型（字典中的）
 	/// </summary>
@@ -26,5 +26,5 @@ public class AddDeviceTypeInput
 	/// 设备类型Id的int形式
 	/// </summary>
 	[Required(ErrorMessage = "设备类型Id的int形式不能为空"), MaxLength(19, ErrorMessage = "设备类型Id的int形式最大长度为：19")]
-	public string DeviceTypeIdInt { get; set; }
+	public long DeviceTypeIdInt { get; set; }
 }

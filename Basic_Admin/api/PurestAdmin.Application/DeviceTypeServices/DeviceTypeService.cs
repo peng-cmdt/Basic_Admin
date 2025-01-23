@@ -1,4 +1,5 @@
 
+using System.Linq;
 using PurestAdmin.Application.DeviceTypeServices.Dtos;
 
 namespace PurestAdmin.Application.DeviceTypeServices;
@@ -17,7 +18,8 @@ public class DeviceTypeService(ISqlSugarClient db) : ApplicationService
     /// <returns></returns>
     public async Task<PagedList<DeviceTypeOutput>> GetPagedListAsync(GetPagedListInput input)
     {
-        var pagedList = await _db.Queryable<DeviceTypeEntity>().ToPurestPagedListAsync(input.PageIndex, input.PageSize);
+        var pagedList = await _db.Queryable<DeviceTypeEntity>().WhereIF(!input.DeviceTypeId.IsNullOrEmpty(), a => a.DeviceTypeId.Contains(input.DeviceTypeId))
+            .WhereIF(input.Class != null, a => a.DeviceTypeIdInt == input.Class).ToPurestPagedListAsync(input.PageIndex, input.PageSize);
         //var pagedList = await _db.Queryable<DeviceTypeEntity>().ToListAsync();
         return pagedList.Adapt<PagedList<DeviceTypeOutput>>();
         //
