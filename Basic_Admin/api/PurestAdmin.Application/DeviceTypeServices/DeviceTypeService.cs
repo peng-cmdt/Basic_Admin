@@ -20,6 +20,7 @@ public class DeviceTypeService(ISqlSugarClient db) : ApplicationService
         var pagedList = await _db.Queryable<DeviceTypeEntity>().ToPurestPagedListAsync(input.PageIndex, input.PageSize);
         //var pagedList = await _db.Queryable<DeviceTypeEntity>().ToListAsync();
         return pagedList.Adapt<PagedList<DeviceTypeOutput>>();
+        //
     }
 
     /// <summary>
