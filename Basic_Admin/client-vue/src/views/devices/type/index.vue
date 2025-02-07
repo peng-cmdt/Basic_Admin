@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { reactive, ref, h } from "vue";
+import { ref, h } from "vue";
 import { getPageList, deleteData } from "@/api/device/device";
 import { ReVxeGrid } from "@/components/ReVxeTable";
 import CreateModal from "./CreateModal.vue";
 import { ReDictionary } from "@/components/ReDictionary";
-import { VxeTag, VxeUI } from "vxe-pc-ui";
+import { VxeUI } from "vxe-pc-ui";
 const reVxeGridRef = ref();
 const columns = [
   { type: "checkbox", title: "", width: 60, align: "center" },
@@ -31,10 +31,15 @@ const columns = [
 ];
 const formRef = ref();
 
+const handleReset = () => {
+  formData.value = handleInitialFormParams();
+};
+
 const handleInitialFormParams = () => ({
   deviceTypeId: "",
   class: null
 });
+
 const formItems = [
   {
     field: "deviceTypeId",
@@ -77,7 +82,9 @@ const formItems = [
     }
   }
 ];
-const formData = reactive<{
+
+// 此处原本是 reactive ，但是重置的时候无法清空对话框，改成ref了
+const formData = ref<{
   deviceTypeId: string;
   class: number | null;
 }>(handleInitialFormParams());
@@ -106,10 +113,10 @@ const handleView = (record: Recordable) => {
 };
 
 const functions: Record<string, string> = {
-  add: "system.user.add",
-  edit: "system.user.edit",
-  view: "system.user.view",
-  delete: "system.user.delete"
+  add: "device.type.add",
+  edit: "device.type.edit",
+  view: "device.type.view",
+  delete: "device.type.delete"
 };
 </script>
 <template>
@@ -120,7 +127,7 @@ const functions: Record<string, string> = {
         :data="formData"
         :items="formItems"
         @submit="handleSearch"
-        @reset="handleInitialFormParams"
+        @reset="handleReset"
       />
     </el-card>
     <el-card :shadow="`never`" class="table-card">
