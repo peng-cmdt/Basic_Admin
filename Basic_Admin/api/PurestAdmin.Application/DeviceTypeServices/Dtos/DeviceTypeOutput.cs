@@ -21,5 +21,5 @@ public class DeviceTypeOutput
 	/// <summary>
 	/// 设备类型Id的int形式
 	/// </summary>
-	public long? DeviceTypeIdInt { get; set; }
+	public long DeviceTypeIdInt { get; set; }
 }

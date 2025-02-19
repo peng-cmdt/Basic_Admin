@@ -7,8 +7,13 @@ import {
   VxeSelect
 } from "vxe-pc-ui";
 import { ReDictionary } from "@/components/ReDictionary";
-import { getSingle, submitData } from "@/api/device/device";
-import { getPageList } from "@/api/device/device";
+import {
+  getSingle,
+  submitData,
+  getPageList,
+  getDicSingle
+} from "@/api/device/device";
+//import { getDictionaryDataByCode } from "@/api/system/dictionary";
 
 const emits = defineEmits<{ (e: "reload"): void }>();
 const vxeModalRef = ref();
@@ -75,8 +80,10 @@ const formItems = ref<VxeFormPropTypes.Items>([
           modelValue: data.class,
           placeholder: "请选设备类型",
           onChange({ value }) {
-            data.class = value;
-            formData.value.class = value;
+            debugger;
+            getDicSingle(value).then((result: any) => {
+              formData.value.class = result.name;
+            });
           }
         });
       }
@@ -100,24 +107,23 @@ const formRules = ref<VxeFormPropTypes.Rules>({
 
 const showAddModal = () => {
   showModal(`添加设备类型`);
-  debugger;
   formData.value = defaultFormData();
   nextTick(() => {
     formRef.value.clearValidate();
   });
 };
 const showEditModal = (record: Recordable) => {
-  showModal(`编辑设备类型->${record.assetId}`);
+  showModal(`编辑设备类型->${record.name}`);
   nextTick(() => {
     formRef.value.clearValidate();
-    getSingle(record.id).then((data: any) => {
+    getSingle(record.deviceTypeId).then((data: any) => {
       formData.value = data;
       //formData.value.assetStatus = data.assetStatus.toString(); // 确保状态为字符串
     });
   });
 };
 const showViewModal = (record: Recordable) => {
-  showModal(`查看设备类型->${record.assetId}`, false);
+  showModal(`查看设备类型->${record.name}`, false);
   nextTick(() => {
     formRef.value.clearValidate();
     getSingle(record.id).then((data: any) => {
@@ -151,7 +157,7 @@ defineExpose({ showAddModal, showEditModal, showViewModal });
     ref="vxeModalRef"
     v-model="modalOptions.modalValue"
     width="600"
-    height="400"
+    height="4   00"
     showFooter
     :title="modalOptions.modalTitle"
   >

@@ -99,7 +99,7 @@ class PureHttp {
         // 关闭进度条动画
         // NProgress.done();
         // 优先判断post/get等方法是否传入回调，否则执行初始化设置等回调
-        if ($config.responseType == 'blob') {
+        if ($config.responseType == "blob") {
           return response;
         }
         if (typeof $config.beforeResponseCallback === "function") {
@@ -193,7 +193,8 @@ class PureHttp {
         })
         .catch(error => {
           reject(error);
-        }).finally(() => loading.close());
+        })
+        .finally(() => loading.close());
     });
   }
 

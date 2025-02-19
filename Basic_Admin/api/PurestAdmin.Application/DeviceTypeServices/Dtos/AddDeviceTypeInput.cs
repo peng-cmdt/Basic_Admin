@@ -25,6 +25,5 @@ public class AddDeviceTypeInput
 	/// <summary>
 	/// 设备类型Id的int形式
 	/// </summary>
-	[Required(ErrorMessage = "设备类型Id的int形式不能为空"), MaxLength(19, ErrorMessage = "设备类型Id的int形式最大长度为：19")]
 	public long DeviceTypeIdInt { get; set; }
 }

@@ -6,5 +6,5 @@ public class GetPagedListInput : PaginationParams
     /// <summary>
     /// ×Ê²ú×´Ì¬
     /// </summary>
-    public long? Class { get; set; }
+    public string Class { get; set; }
 }

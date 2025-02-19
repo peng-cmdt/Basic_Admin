@@ -8,19 +8,24 @@ export function getPageList(params) {
 }
 
 export const submitData = (params: any) => {
+  debugger;
   return http.request(
-    params.id ? "put" : "post",
-    `/device-typ/${params.id ?? ""}`,
+    params.deviceTypeIdInt ? "put" : "post",
+    `/device-type/${params.deviceTypeIdInt ?? ""}`,
     {
       data: params
     }
   );
 };
 
+export const getDicSingle = (id: number) => {
+  return http.request("get", `/dict-data/${id}`);
+};
+
 export const getSingle = (id: number) => {
-  return http.request("get", `/device-typ/${id}`);
+  return http.request("get", `/device-type/${id}`);
 };
 
 export const deleteData = (id: number) => {
-  return http.request("delete", `/device-typ/${id}`);
+  return http.request("delete", `/device-type/${id}`);
 };
